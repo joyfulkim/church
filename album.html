@@ -11,33 +11,96 @@
   <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Pretendard','sans-serif']},colors:{gold:{300:'#fed7aa',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c'}}}}}</script>
   <link rel="stylesheet" href="shared.css" />
   <style>
-    /* Behold 위젯 커스터마이징 */
-    #behold-widget {
-      --behold-border-radius: 16px;
-      --behold-gap: 12px;
+    /* ── 갤러리 그리드 ── */
+    .gallery-grid {
+      columns: 2;
+      column-gap: 12px;
+    }
+    @media(min-width: 640px) { .gallery-grid { columns: 3; } }
+    @media(min-width: 1024px) { .gallery-grid { columns: 4; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      border: 1px solid rgba(249,115,22,0.12);
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .gallery-item:hover {
+      border-color: rgba(249,115,22,0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-item .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 12px;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+
+    /* ── 라이트박스 ── */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    #lightbox.open { opacity: 1; pointer-events: auto; }
+    #lightbox img {
+      max-width: 90vw; max-height: 88vh;
+      border-radius: 14px;
+      object-fit: contain;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    }
+    .lb-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(249,115,22,0.15);
+      border: 1px solid rgba(249,115,22,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: #fb923c; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lb-btn:hover { background: rgba(249,115,22,0.3); }
+    #lb-prev { left: 16px; }
+    #lb-next { right: 16px; }
+    #lb-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; cursor: pointer; font-size: 18px;
+      transition: background 0.2s;
+    }
+    #lb-close:hover { background: rgba(255,255,255,0.18); }
+    #lb-counter {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 0.08em;
     }
 
-    /* 설정 안내 카드 */
-    .setup-card {
-      background: rgba(249,115,22,0.06);
-      border: 1px dashed rgba(249,115,22,0.35);
-      border-radius: 20px;
-      padding: 48px 32px;
+    /* ── 로딩 스피너 ── */
+    .spinner {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 3px solid rgba(249,115,22,0.15);
+      border-top-color: #fb923c;
+      animation: spin 0.8s linear infinite;
     }
-    .setup-step {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      text-align: left;
-    }
-    .setup-num {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(249,115,22,0.15);
-      border: 1px solid rgba(249,115,22,0.35);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; font-weight: 700; color: #fb923c;
-      flex-shrink: 0;
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
@@ -96,77 +159,98 @@
       <span class="text-white">함께한</span><br/>
       <span class="text-gold-gradient">소중한 순간들</span>
     </h1>
-    <p class="text-stone-400 text-lg max-w-xl leading-relaxed">성서침례교회 인스타그램의 사진들을 모아 보여드립니다.</p>
+    <p class="text-stone-400 text-lg max-w-xl leading-relaxed">성서침례교회의 예배, 행사, 공동체 순간들을 담았습니다.</p>
   </div>
 </div>
 
-<!-- INSTAGRAM FEED -->
-<section class="py-24">
+<!-- GALLERY -->
+<section class="py-20">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-    <!-- ✅ 인스타그램 연동이 완료된 경우 아래 위젯이 표시됩니다 -->
-    <!-- behold 위젯 ID를 설정한 후에는 아래 setup-section을 삭제하세요 -->
-
-    <div id="behold-widget" class="reveal"></div>
-
-    <!-- ──────────────────────────────────────────
-         📌 인스타그램 연동 설정 안내
-         연동 완료 후 이 블록(id="setup-section")을 삭제하세요
-    ────────────────────────────────────────── -->
-    <div id="setup-section" class="setup-card reveal max-w-2xl mx-auto">
-      <div class="text-center mb-10">
-        <div class="icon-box mx-auto mb-5" style="width:60px;height:60px;">
-          <iconify-icon icon="solar:instagram-bold" style="color:#fb923c;font-size:30px;"></iconify-icon>
-        </div>
-        <h2 class="text-2xl font-black text-white mb-3">인스타그램 연동 설정</h2>
-        <p class="text-stone-400 text-sm leading-relaxed">아래 3단계를 따라 교회 인스타그램을 연동하면<br/>사진들이 이 페이지에 자동으로 표시됩니다.</p>
+    <!-- 상단 바 -->
+    <div class="flex items-center justify-between mb-10 reveal">
+      <div>
+        <span class="pill-badge mb-3">Gallery</span>
+        <h2 class="text-2xl font-black text-white" id="photo-count-label">사진 불러오는 중...</h2>
       </div>
+      <a
+        href="https://github.com/joyfulkim/church/upload/main/img/gallery"
+        target="_blank"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-stone-950 btn-shimmer"
+        title="GitHub에 사진 업로드 (관리자용)"
+      >
+        <iconify-icon icon="solar:upload-bold" style="font-size:16px;"></iconify-icon>
+        사진 추가
+      </a>
+    </div>
 
-      <div class="space-y-5 mb-10">
-        <div class="setup-step">
-          <div class="setup-num">1</div>
-          <div>
-            <div class="text-white font-semibold mb-1">Behold.so 계정 만들기</div>
-            <p class="text-stone-400 text-sm leading-relaxed">
-              <a href="https://behold.so" target="_blank" class="text-gold-400 hover:underline font-medium">behold.so</a> 에서 무료 계정을 생성합니다. (신용카드 불필요)
-            </p>
+    <!-- 로딩 -->
+    <div id="gallery-loading" class="flex flex-col items-center justify-center py-32 gap-4">
+      <div class="spinner"></div>
+      <p class="text-stone-500 text-sm">사진을 불러오고 있습니다...</p>
+    </div>
+
+    <!-- 갤러리 그리드 -->
+    <div id="gallery-grid" class="gallery-grid hidden"></div>
+
+    <!-- 빈 상태 -->
+    <div id="gallery-empty" class="hidden">
+      <div class="card-bezel rounded-2xl p-14 text-center max-w-lg mx-auto" style="border-style:dashed;">
+        <div class="icon-box mx-auto mb-5" style="width:64px;height:64px;">
+          <iconify-icon icon="solar:gallery-add-bold" style="color:#fb923c;font-size:32px;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-3">아직 등록된 사진이 없습니다</h3>
+        <p class="text-stone-400 text-sm leading-relaxed mb-8">
+          아래 버튼을 눌러 GitHub에 사진을 업로드하면<br/>이 페이지에 자동으로 표시됩니다.
+        </p>
+        <!-- 업로드 안내 -->
+        <div class="text-left space-y-3 mb-8 bg-stone-900/50 rounded-xl p-5">
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5" style="background:rgba(249,115,22,0.2);color:#fb923c;">1</div>
+            <p class="text-stone-400 text-sm">아래 <strong class="text-white">사진 업로드</strong> 버튼 클릭</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5" style="background:rgba(249,115,22,0.2);color:#fb923c;">2</div>
+            <p class="text-stone-400 text-sm">GitHub 페이지에서 사진 파일을 <strong class="text-white">드래그&드롭</strong></p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5" style="background:rgba(249,115,22,0.2);color:#fb923c;">3</div>
+            <p class="text-stone-400 text-sm"><strong class="text-white">Commit changes</strong> 버튼 클릭 → 약 1분 후 자동 반영</p>
           </div>
         </div>
-        <div class="setup-step">
-          <div class="setup-num">2</div>
-          <div>
-            <div class="text-white font-semibold mb-1">Instagram 계정 연결</div>
-            <p class="text-stone-400 text-sm leading-relaxed">
-              Behold 대시보드에서 교회 인스타그램 계정(@계정명)을 연결하고, 피드 위젯을 생성합니다.
-            </p>
-          </div>
-        </div>
-        <div class="setup-step">
-          <div class="setup-num">3</div>
-          <div>
-            <div class="text-white font-semibold mb-1">Widget ID를 album.html에 붙여넣기</div>
-            <p class="text-stone-400 text-sm leading-relaxed">
-              위젯 생성 후 Behold에서 제공하는 <span class="text-gold-400 font-mono text-xs bg-stone-800 px-1.5 py-0.5 rounded">Widget ID</span>를 복사한 뒤, <span class="text-gold-400 font-mono text-xs bg-stone-800 px-1.5 py-0.5 rounded">album.html</span> 하단의 스크립트에서 <span class="text-gold-400 font-mono text-xs bg-stone-800 px-1.5 py-0.5 rounded">YOUR_WIDGET_ID</span>를 교체하세요.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="block-quote text-sm text-stone-300 leading-relaxed">
-        💡 <strong class="text-white">무료 플랜으로 충분합니다.</strong> Behold 무료 플랜은 인스타그램 게시물 최대 24개를 자동으로 가져오며, 별도의 API 신청 없이 간단히 연동됩니다.
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="https://behold.so" target="_blank" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-stone-950 btn-shimmer text-sm">
-          <iconify-icon icon="solar:link-bold" style="font-size:16px;"></iconify-icon>
-          Behold.so 바로가기
+        <a
+          href="https://github.com/joyfulkim/church/upload/main/img/gallery"
+          target="_blank"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-stone-950 btn-shimmer"
+        >
+          <iconify-icon icon="solar:upload-bold" style="font-size:18px;"></iconify-icon>
+          사진 업로드하러 가기
         </a>
       </div>
     </div>
-    <!-- /setup-section -->
+
+    <!-- 에러 상태 -->
+    <div id="gallery-error" class="hidden text-center py-24">
+      <div class="icon-box mx-auto mb-4" style="width:56px;height:56px;">
+        <iconify-icon icon="solar:wifi-router-bold" style="color:#fb923c;font-size:26px;"></iconify-icon>
+      </div>
+      <p class="text-stone-400">사진을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
+      <button onclick="loadGallery()" class="mt-4 px-5 py-2 rounded-full text-sm font-semibold text-stone-950 btn-shimmer">
+        다시 시도
+      </button>
+    </div>
 
   </div>
 </section>
+
+<!-- 라이트박스 -->
+<div id="lightbox">
+  <button id="lb-close">✕</button>
+  <button class="lb-btn" id="lb-prev"><iconify-icon icon="solar:arrow-left-bold" style="font-size:20px;"></iconify-icon></button>
+  <img id="lb-img" src="" alt="" />
+  <button class="lb-btn" id="lb-next"><iconify-icon icon="solar:arrow-right-bold" style="font-size:20px;"></iconify-icon></button>
+  <div id="lb-counter"></div>
+</div>
 
 <!-- FOOTER -->
 <footer class="border-t border-stone-800/60 py-12">
@@ -201,44 +285,135 @@
         </ul>
       </div>
     </div>
-    <div class="border-t border-stone-800/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="border-t border-stone-800/60 pt-8">
       <p class="text-stone-600 text-sm">© 2026 성서침례교회. All rights reserved.</p>
-      <p class="text-stone-700 text-xs">"내게 능력 주시는 자 안에서 내가 모든 것을 할 수 있느니라" — 빌립보서 4:13</p>
     </div>
   </div>
 </footer>
 
 <script src="shared.js"></script>
-
-<!--
-  ══════════════════════════════════════════════════
-  📸 인스타그램 피드 연동 (Behold.so)
-  ──────────────────────────────────────────────────
-  1. behold.so 에서 위젯을 생성한 후
-  2. 아래 'YOUR_WIDGET_ID' 를 실제 Widget ID로 교체하세요
-  3. setup-section div를 삭제하면 안내문이 사라집니다
-  ══════════════════════════════════════════════════
--->
 <script>
-  (function(w, d) {
-    var widgetId = '5AEBxT6Fd2fuWl5uggXV';
+  const REPO = 'joyfulkim/church';
+  const FOLDER = 'img/gallery';
+  const API_URL = `https://api.github.com/repos/${REPO}/contents/${FOLDER}`;
+  const IMAGE_EXT = /\.(jpg|jpeg|png|gif|webp|avif)$/i;
 
-    if (widgetId === 'YOUR_WIDGET_ID') return; // 설정 전에는 실행 안 함
+  let photos = [];
+  let currentIndex = 0;
 
-    // 설정 완료 시 안내 섹션 숨기기
-    var setupSection = d.getElementById('setup-section');
-    if (setupSection) setupSection.style.display = 'none';
+  async function loadGallery() {
+    show('gallery-loading');
+    hide('gallery-grid');
+    hide('gallery-empty');
+    hide('gallery-error');
 
-    // Behold 위젯 로드
-    var el = d.getElementById('behold-widget');
-    if (el) el.setAttribute('data-behold-id', widgetId);
+    try {
+      const cacheKey = 'sbc-gallery-v1';
+      const cacheTs  = 'sbc-gallery-ts';
+      const TTL = 3 * 60 * 1000; // 3분 캐시
 
-    var s = d.createElement('script');
-    s.src = 'https://cdn.behold.so/widget.js';
-    s.async = true;
-    d.head.appendChild(s);
-  })(window, document);
+      let files;
+      const cached = sessionStorage.getItem(cacheKey);
+      const ts     = parseInt(sessionStorage.getItem(cacheTs) || '0');
+
+      if (cached && (Date.now() - ts) < TTL) {
+        files = JSON.parse(cached);
+      } else {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error('fetch failed');
+        files = await res.json();
+        sessionStorage.setItem(cacheKey, JSON.stringify(files));
+        sessionStorage.setItem(cacheTs, Date.now().toString());
+      }
+
+      photos = files
+        .filter(f => f.type === 'file' && IMAGE_EXT.test(f.name))
+        .map(f => ({ name: f.name, url: f.download_url }));
+
+      hide('gallery-loading');
+
+      if (photos.length === 0) {
+        show('gallery-empty');
+        document.getElementById('photo-count-label').textContent = '등록된 사진이 없습니다';
+        return;
+      }
+
+      renderGallery();
+    } catch (e) {
+      hide('gallery-loading');
+      show('gallery-error');
+      document.getElementById('photo-count-label').textContent = '오류가 발생했습니다';
+    }
+  }
+
+  function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '';
+
+    photos.forEach((photo, idx) => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `
+        <img src="${photo.url}" alt="${photo.name}" loading="lazy" />
+        <div class="overlay">
+          <iconify-icon icon="solar:maximize-square-bold" style="color:rgba(255,255,255,0.8);font-size:20px;"></iconify-icon>
+        </div>
+      `;
+      item.addEventListener('click', () => openLightbox(idx));
+      grid.appendChild(item);
+    });
+
+    show('gallery-grid');
+    document.getElementById('photo-count-label').textContent = `사진 ${photos.length}장`;
+  }
+
+  /* ── 라이트박스 ── */
+  function openLightbox(idx) {
+    currentIndex = idx;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    document.getElementById('lb-img').src = photos[currentIndex].url;
+    document.getElementById('lb-counter').textContent = `${currentIndex + 1} / ${photos.length}`;
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+    updateLightbox();
+  });
+  document.getElementById('lb-next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % photos.length;
+    updateLightbox();
+  });
+
+  // 키보드 네비게이션
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + photos.length) % photos.length; updateLightbox(); }
+    if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % photos.length; updateLightbox(); }
+  });
+
+  // 배경 클릭 시 닫기
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+
+  /* ── 헬퍼 ── */
+  function show(id) { document.getElementById(id).classList.remove('hidden'); }
+  function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+  loadGallery();
 </script>
-
 </body>
 </html>
