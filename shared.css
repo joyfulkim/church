@@ -10,11 +10,11 @@ body { font-family: 'Pretendard', sans-serif; background: #0B1120; color: #f0f4f
   border-bottom: 1px solid rgba(249,115,22,0.14);
 }
 .logo-img {
-  width: 32px; height: 32px; border-radius: 8px;
+  width: 44px; height: 44px; border-radius: 10px;
   object-fit: cover;
 }
 .nav-link {
-  font-size: 15px; font-weight: 500;
+  font-size: 20px; font-weight: 500;
   color: #94a3b8;
   transition: color 0.25s;
 }
