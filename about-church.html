@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="img/logo_bbfk.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성서침례교회란? | 성서침례교회 | 조이플 미션</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Pretendard','sans-serif']},colors:{gold:{300:'#fed7aa',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c'}}}}}</script>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo_bbfk.png" alt="성서침례교회 로고" class="logo-img" />
+        <span class="font-bold text-white tracking-tight" style="font-size:30px;">성서침례교회</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <div class="nav-dropdown">
+          <a href="about.html" class="nav-link flex items-center gap-1">소개 <iconify-icon icon="solar:alt-arrow-down-linear" style="font-size:15px;margin-top:1px;"></iconify-icon></a>
+          <div class="nav-dropdown-menu">
+            <a href="about.html"><iconify-icon icon="solar:buildings-2-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>교회 소개</a>
+            <a href="about-church.html"><iconify-icon icon="solar:book-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>성서침례교회란?</a>
+          </div>
+        </div>
+        <a href="worship.html" class="nav-link">예배</a>
+        <a href="programs.html" class="nav-link">사역</a>
+        <a href="events.html" class="nav-link">행사</a>
+        <div class="nav-dropdown">
+          <a href="community.html" class="nav-link flex items-center gap-1">공동체 <iconify-icon icon="solar:alt-arrow-down-linear" style="font-size:15px;margin-top:1px;"></iconify-icon></a>
+          <div class="nav-dropdown-menu">
+            <a href="community.html"><iconify-icon icon="solar:users-group-rounded-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>공동체 소개</a>
+            <a href="album.html"><iconify-icon icon="solar:gallery-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>사진 앨범</a>
+          </div>
+        </div>
+        <a href="contact.html" class="nav-link">오시는 길</a>
+      </div>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-stone-950 btn-shimmer">
+        <iconify-icon icon="solar:heart-bold" style="font-size:14px;"></iconify-icon>
+        함께 예배해요
+      </a>
+      <button id="mob-btn" class="md:hidden p-2 text-stone-400"><iconify-icon icon="solar:hamburger-menu-linear" style="font-size:22px;"></iconify-icon></button>
+    </div>
+  </div>
+  <div id="mob-menu" class="hidden md:hidden border-t border-stone-800/50">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="about.html" class="text-stone-300 font-medium">소개</a>
+      <a href="about-church.html" class="text-stone-400 font-medium text-sm" style="padding-left:20px;">↳ 성서침례교회란?</a>
+      <a href="worship.html" class="text-stone-300 font-medium">예배</a>
+      <a href="programs.html" class="text-stone-300 font-medium">사역</a>
+      <a href="events.html" class="text-stone-300 font-medium">행사</a>
+      <a href="community.html" class="text-stone-300 font-medium">공동체</a>
+      <a href="album.html" class="text-stone-400 font-medium text-sm" style="padding-left:20px;">↳ 사진 앨범</a>
+      <a href="contact.html" class="text-stone-300 font-medium">오시는 길</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero hero-grain">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="breadcrumb">
+      <a href="index.html">홈</a><span>›</span>
+      <a href="about.html">소개</a><span>›</span>
+      <span style="color:#fb923c;">성서침례교회란?</span>
+    </div>
+    <span class="pill-badge mb-5">Bible Baptist Church</span>
+    <h1 class="text-4xl lg:text-6xl font-black tracking-tight leading-tight mb-5">
+      <span class="text-white">성서침례교회란</span><br/>
+      <span class="text-gold-gradient">무엇인가요?</span>
+    </h1>
+    <p class="text-stone-400 text-lg max-w-xl leading-relaxed">오직 성경 위에 서서, 오직 믿음으로 나아가는 교회입니다.</p>
+  </div>
+</div>
+
+<!-- 핵심 정의 -->
+<section class="py-24">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-16">
+      <span class="pill-badge mb-5">정의</span>
+      <h2 class="section-title text-white mb-6">성서침례교회 이름의 의미</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 reveal stagger">
+      <div class="card-bezel rounded-2xl p-8 text-center">
+        <div class="icon-box mx-auto mb-5">
+          <iconify-icon icon="solar:book-bold" style="color:#fb923c;font-size:24px;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-black text-white mb-3">성서 <span class="text-gold-gradient">(聖書)</span></h3>
+        <p class="text-stone-400 text-sm leading-relaxed">
+          하나님의 말씀인 성경(Bible)을 교회의 유일한 권위로 삼는다는 의미입니다. 어떤 전통이나 인간의 가르침보다 성경이 우선합니다.
+        </p>
+      </div>
+      <div class="card-bezel rounded-2xl p-8 text-center">
+        <div class="icon-box mx-auto mb-5">
+          <iconify-icon icon="solar:waterdrops-bold" style="color:#fb923c;font-size:24px;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-black text-white mb-3">침례 <span class="text-gold-gradient">(浸禮)</span></h3>
+        <p class="text-stone-400 text-sm leading-relaxed">
+          '침례'는 물에 완전히 잠기는 세례 방식입니다. 예수님께서 요단강에서 받으신 방식 그대로, 죽음과 부활을 상징하는 신앙 고백의 의식입니다.
+        </p>
+      </div>
+      <div class="card-bezel rounded-2xl p-8 text-center">
+        <div class="icon-box mx-auto mb-5">
+          <iconify-icon icon="solar:home-heart-bold" style="color:#fb923c;font-size:24px;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-black text-white mb-3">교회 <span class="text-gold-gradient">(敎會)</span></h3>
+        <p class="text-stone-400 text-sm leading-relaxed">
+          부활하신 예수 그리스도를 주로 고백하는 믿는 자들의 자발적 공동체입니다. 지역 교회 중심의 신앙 공동체를 지향합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- 침례교 역사 -->
+<section class="py-24" style="background:#1a2540;">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <div class="reveal mb-14">
+      <span class="pill-badge mb-5">역사</span>
+      <h2 class="section-title text-white">침례교의 뿌리</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      <div class="space-y-6 reveal">
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="date-badge flex-shrink-0">
+              <span class="text-lg font-black text-gold-400">17C</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-white mb-2">종교개혁의 흐름 속에서</h4>
+              <p class="text-stone-400 text-sm leading-relaxed">침례교는 17세기 유럽 종교개혁 운동에서 시작되었습니다. "오직 성경(Sola Scriptura)"을 외친 개혁가들의 정신을 이어받아, 국가교회 제도에서 벗어난 자유로운 신앙 공동체를 추구했습니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="date-badge flex-shrink-0">
+              <span class="text-lg font-black text-gold-400">영국</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-white mb-2">영국에서 꽃핀 침례교</h4>
+              <p class="text-stone-400 text-sm leading-relaxed">1609년 존 스미스(John Smyth)가 암스테르담에서 최초의 침례교 공동체를 세웠습니다. 신자 세례(believer's baptism)를 강조하며 유아세례를 거부한 것이 특징이었습니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="date-badge flex-shrink-0">
+              <span class="text-lg font-black text-gold-400">한국</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-white mb-2">한국의 침례교</h4>
+              <p class="text-stone-400 text-sm leading-relaxed">1895년 선교사들에 의해 한국에 전해진 침례교는 성경 중심의 신앙과 지역 교회 자치를 강조하며 성장했습니다. 성서침례교회는 이 전통 위에서 더욱 철저하게 성경 원리를 따르고자 합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="animation-delay:0.15s;">
+        <div class="block-quote mb-8">
+          <p class="text-stone-200 leading-relaxed text-lg italic mb-4">"교회의 유일한 머리는 예수 그리스도이시며, 교회의 유일한 법은 성경입니다."</p>
+          <p class="text-stone-500 text-sm">— 침례교 신앙의 핵심 고백</p>
+        </div>
+        <div class="card-bezel rounded-2xl p-7 space-y-5">
+          <h4 class="font-bold text-white text-lg">성서침례교회의 특징</h4>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <iconify-icon icon="solar:check-circle-bold" style="color:#fb923c;font-size:20px;flex-shrink:0;margin-top:2px;"></iconify-icon>
+              <div>
+                <div class="text-white font-semibold text-sm">성경 최고 권위</div>
+                <div class="text-stone-400 text-xs mt-0.5">모든 교리와 생활의 기준은 오직 성경입니다</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <iconify-icon icon="solar:check-circle-bold" style="color:#fb923c;font-size:20px;flex-shrink:0;margin-top:2px;"></iconify-icon>
+              <div>
+                <div class="text-white font-semibold text-sm">신자 침례</div>
+                <div class="text-stone-400 text-xs mt-0.5">복음을 믿고 고백한 자에게만 침례를 베풉니다</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <iconify-icon icon="solar:check-circle-bold" style="color:#fb923c;font-size:20px;flex-shrink:0;margin-top:2px;"></iconify-icon>
+              <div>
+                <div class="text-white font-semibold text-sm">지역 교회 자치</div>
+                <div class="text-stone-400 text-xs mt-0.5">각 교회는 그리스도의 머리 되심 아래 자율적으로 운영됩니다</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <iconify-icon icon="solar:check-circle-bold" style="color:#fb923c;font-size:20px;flex-shrink:0;margin-top:2px;"></iconify-icon>
+              <div>
+                <div class="text-white font-semibold text-sm">영혼의 자유</div>
+                <div class="text-stone-400 text-xs mt-0.5">모든 사람은 하나님 앞에 직접 나아갈 수 있는 자유가 있습니다</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <iconify-icon icon="solar:check-circle-bold" style="color:#fb923c;font-size:20px;flex-shrink:0;margin-top:2px;"></iconify-icon>
+              <div>
+                <div class="text-white font-semibold text-sm">정교 분리</div>
+                <div class="text-stone-400 text-xs mt-0.5">교회와 국가는 분리되어야 하며, 신앙의 자유를 중시합니다</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- 우리가 믿는 것 -->
+<section class="py-24">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-14">
+      <span class="pill-badge mb-5">신앙고백</span>
+      <h2 class="section-title text-white mb-4">우리가 믿는 것</h2>
+      <p class="text-stone-400 max-w-lg mx-auto">성서침례교회는 역사적 기독교 신앙을 고백하며, 성경이 가르치는 진리 위에 서 있습니다.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5 reveal stagger">
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="flex items-start gap-4">
+          <div class="icon-box flex-shrink-0">
+            <iconify-icon icon="solar:book-2-bold" style="color:#fb923c;font-size:22px;"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="font-bold text-white mb-2">성경의 권위</h3>
+            <p class="text-stone-400 text-sm leading-relaxed">구약과 신약 성경 66권은 하나님의 영감으로 기록된 말씀으로, 신앙과 생활의 유일하고 완전한 법칙입니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="flex items-start gap-4">
+          <div class="icon-box flex-shrink-0">
+            <iconify-icon icon="solar:star-shine-bold" style="color:#fb923c;font-size:22px;"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="font-bold text-white mb-2">삼위일체 하나님</h3>
+            <p class="text-stone-400 text-sm leading-relaxed">하나님은 성부, 성자, 성령 삼위로 존재하시는 한 분 하나님이십니다. 창조주이시며 구원의 하나님이십니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="flex items-start gap-4">
+          <div class="icon-box flex-shrink-0">
+            <iconify-icon icon="solar:heart-shine-bold" style="color:#fb923c;font-size:22px;"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="font-bold text-white mb-2">예수 그리스도의 구원</h3>
+            <p class="text-stone-400 text-sm leading-relaxed">예수 그리스도는 완전한 하나님이자 완전한 인간으로, 십자가에서 우리 죄를 위해 죽으시고 부활하셨습니다. 믿음으로만 구원을 받습니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="flex items-start gap-4">
+          <div class="icon-box flex-shrink-0">
+            <iconify-icon icon="solar:people-nearby-bold" style="color:#fb923c;font-size:22px;"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="font-bold text-white mb-2">교회 공동체</h3>
+            <p class="text-stone-400 text-sm leading-relaxed">교회는 예수 그리스도를 믿는 자들의 모임입니다. 두 가지 의식(침례·성찬)과 복음 전파를 그 사명으로 합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="flex items-start gap-4">
+          <div class="icon-box flex-shrink-0">
+            <iconify-icon icon="solar:ghost-bold" style="color:#fb923c;font-size:22px;"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="font-bold text-white mb-2">성령의 역사</h3>
+            <p class="text-stone-400 text-sm leading-relaxed">성령 하나님은 신자 안에 거하시며 거듭남, 성화, 사역을 위한 능력을 주십니다. 말씀과 함께 역사하십니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="flex items-start gap-4">
+          <div class="icon-box flex-shrink-0">
+            <iconify-icon icon="solar:sun-2-bold" style="color:#fb923c;font-size:22px;"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="font-bold text-white mb-2">재림과 영원한 소망</h3>
+            <p class="text-stone-400 text-sm leading-relaxed">예수 그리스도께서 다시 오실 것을 믿습니다. 신자에게는 영원한 생명이, 하나님을 거부한 자에게는 심판이 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- 성서침례교회 vs 일반 교회 -->
+<section class="py-24" style="background:#1a2540;">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-14">
+      <span class="pill-badge mb-5">특징 비교</span>
+      <h2 class="section-title text-white mb-4">침례교는 다른 교단과 무엇이 다른가요?</h2>
+    </div>
+    <div class="card-bezel rounded-2xl overflow-hidden reveal">
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th style="color:#fb923c;">성서침례교회</th>
+            <th>일반 개신교</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-white font-medium">세례 방식</td>
+            <td>물에 완전히 잠기는 <span class="tag tag-gold">침례(浸禮)</span></td>
+            <td>물을 뿌리거나 붓는 세례</td>
+          </tr>
+          <tr>
+            <td class="text-white font-medium">세례 대상</td>
+            <td>믿음을 고백한 <span class="tag tag-gold">신자</span>만</td>
+            <td>유아 세례 포함</td>
+          </tr>
+          <tr>
+            <td class="text-white font-medium">교회 운영</td>
+            <td>회중(성도) 중심 <span class="tag tag-gold">자치</span></td>
+            <td>감독·노회 등 상위 기관 존재</td>
+          </tr>
+          <tr>
+            <td class="text-white font-medium">신앙 권위</td>
+            <td><span class="tag tag-gold">오직 성경</span></td>
+            <td>성경 + 교단 전통·고백</td>
+          </tr>
+          <tr>
+            <td class="text-white font-medium">성찬 이해</td>
+            <td>기념(Memorial) — <span class="tag tag-gold">상징</span>으로 이해</td>
+            <td>교단마다 상이</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 cta-bg"></div>
+  <div class="relative max-w-3xl mx-auto px-6 text-center reveal">
+    <span class="pill-badge mb-6 mx-auto w-fit">함께 걸어요</span>
+    <h2 class="text-4xl lg:text-5xl font-black tracking-tight mb-6">
+      <span class="text-white">궁금한 점이</span><br/>
+      <span class="text-gold-gradient">있으신가요?</span>
+    </h2>
+    <p class="text-stone-400 text-lg mb-10 leading-relaxed">성서침례교회에 대해 더 알고 싶으시거나<br/>방문을 원하신다면 언제든지 연락주세요.</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="contact.html" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-stone-950 btn-shimmer shadow-lg">
+        <iconify-icon icon="solar:phone-bold" style="font-size:18px;"></iconify-icon>
+        문의하기
+      </a>
+      <a href="worship.html" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-base font-semibold text-stone-200 border border-stone-700 hover:border-gold-600/50 hover:text-gold-400 transition-all duration-300">
+        예배 안내 보기
+        <iconify-icon icon="solar:arrow-right-bold" style="font-size:16px;"></iconify-icon>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-stone-800/60 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="img/logo_bbfk.png" alt="성서침례교회 로고" class="logo-img" />
+          <span class="font-bold text-lg text-white">성서침례교회</span>
+        </div>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-xs">하나님의 사랑으로 함께 피어나는 공동체.<br/>모든 사람을 환영합니다.</p>
+      </div>
+      <div>
+        <div class="footer-label">메뉴</div>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="footer-link">교회 소개</a></li>
+          <li><a href="about-church.html" class="footer-link">성서침례교회란?</a></li>
+          <li><a href="worship.html" class="footer-link">예배 안내</a></li>
+          <li><a href="programs.html" class="footer-link">사역</a></li>
+          <li><a href="events.html" class="footer-link">행사</a></li>
+          <li><a href="community.html" class="footer-link">공동체</a></li>
+          <li><a href="album.html" class="footer-link">사진 앨범</a></li>
+          <li><a href="contact.html" class="footer-link">오시는 길</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-label">연락처</div>
+        <ul class="space-y-2">
+          <li class="text-stone-500 text-sm">서울 마포구 합정동</li>
+          <li class="text-stone-500 text-sm">02-1234-5678</li>
+          <li class="text-stone-500 text-sm">hello@joychurch.kr</li>
+          <li class="text-stone-500 text-sm">주일 11:00 AM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-stone-800/60 pt-8">
+      <p class="text-stone-600 text-sm">© 2026 성서침례교회. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>
