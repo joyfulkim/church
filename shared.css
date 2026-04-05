@@ -220,15 +220,18 @@ body { font-family: 'Pretendard', sans-serif; background: #0B1120; color: #f0f4f
   padding: 8px;
   min-width: 150px;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.22s, transform 0.22s cubic-bezier(0.16,1,0.3,1);
+  visibility: hidden;
+  /* 마우스가 떠난 후 3초 뒤에 사라짐 */
+  transition: opacity 0.25s 3s, visibility 0s 3.25s, transform 0.25s 3s;
   z-index: 100;
   box-shadow: 0 16px 40px rgba(0,0,0,0.5);
 }
 .nav-dropdown:hover .nav-dropdown-menu {
   opacity: 1;
-  pointer-events: auto;
+  visibility: visible;
   transform: translateX(-50%) translateY(0);
+  /* 나타날 때는 즉시 */
+  transition: opacity 0.22s 0s, visibility 0s 0s, transform 0.22s 0s;
 }
 .nav-dropdown-menu a {
   display: flex;
