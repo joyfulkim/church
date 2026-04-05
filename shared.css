@@ -205,6 +205,45 @@ body { font-family: 'Pretendard', sans-serif; background: #0B1120; color: #f0f4f
 /* ── QUOTE ── */
 .block-quote { border-left:3px solid rgba(249,115,22,0.45); padding:16px 20px; background:rgba(249,115,22,0.05); border-radius:0 12px 12px 0; }
 
+/* ── MARQUEE ── */
+.marquee-wrapper { overflow: hidden; }
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: marquee-scroll 36s linear infinite;
+}
+.marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── TEAM CARD ── */
+.team-card {
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(249,115,22,0.18);
+  background: linear-gradient(145deg, rgba(249,115,22,0.06), rgba(234,88,12,0.03));
+  transition: border-color 0.35s;
+}
+.team-card:hover { border-color: rgba(249,115,22,0.45); }
+.team-avatar-area {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(11,17,32,0.6));
+}
+.team-avatar {
+  width: 96px; height: 96px; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 900; color: #fff;
+  border: 3px solid rgba(255,255,255,0.15);
+}
+
 /* ── FORM ── */
 .form-input {
   width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(249,115,22,0.16);
