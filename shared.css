@@ -13,7 +13,7 @@ body { font-family: 'Pretendard', sans-serif; background: #0c0a08; color: #f5f0e
   object-fit: cover;
 }
 .nav-link {
-  font-size: 0.875rem; font-weight: 500;
+  font-size: 15px; font-weight: 500;
   color: #a8a29e;
   transition: color 0.25s;
 }
