@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="img/logo_bbfk.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>선교 | 성서침례교회 | 조이플 미션</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Pretendard', 'sans-serif'] },
+          colors: {
+            gold: { 300: '#f2d9a3', 400: '#fb923c', 500: '#f97316', 600: '#ea580c', 700: '#c2410c', 800: '#9a3412' },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="shared.css" />
+  <!-- jsvectormap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"></script>
+  <style>
+    /* ── Map Container ── */
+    #world-map { width: 100%; height: 460px; background: transparent; }
+    .jvm-container { background: transparent !important; }
+    .jvm-region { cursor: default !important; }
+
+    /* ── Cross Marker ── */
+    .mission-cross {
+      cursor: pointer;
+      transition: transform 0.15s, fill 0.15s;
+      transform-box: fill-box;
+      transform-origin: center;
+      filter: drop-shadow(0 0 6px rgba(249,115,22,0.7));
+    }
+    .mission-cross:hover { fill: #fbbf24 !important; transform: scale(1.35); }
+
+    /* ── Tooltip ── */
+    #map-tooltip {
+      position: fixed;
+      z-index: 200;
+      display: none;
+      pointer-events: none;
+      background: rgba(28,25,23,0.97);
+      border: 1px solid rgba(251,146,60,0.5);
+      border-radius: 14px;
+      padding: 14px 18px;
+      min-width: 200px;
+      max-width: 280px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #map-tooltip .tip-country { color: #fb923c; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+    #map-tooltip .tip-row { color: #d6d3d1; font-size: 13px; line-height: 1.6; }
+    #map-tooltip .tip-name { color: #fef3c7; font-weight: 600; }
+
+    /* ── Missionary Cards ── */
+    .mission-card {
+      background: linear-gradient(145deg, rgba(28,25,23,0.9) 0%, rgba(41,37,36,0.8) 100%);
+      border: 1px solid rgba(120,113,108,0.25);
+      border-radius: 20px;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+    .mission-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(251,146,60,0.45);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .mission-flag { font-size: 2.8rem; line-height: 1; }
+    .missionary-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.35rem; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .avatar-grad-1 { background: linear-gradient(135deg,#f97316,#dc2626); }
+    .avatar-grad-2 { background: linear-gradient(135deg,#3b82f6,#8b5cf6); }
+    .avatar-grad-3 { background: linear-gradient(135deg,#10b981,#059669); }
+    .avatar-grad-4 { background: linear-gradient(135deg,#f59e0b,#d97706); }
+    .avatar-grad-5 { background: linear-gradient(135deg,#ec4899,#9333ea); }
+    .avatar-grad-6 { background: linear-gradient(135deg,#14b8a6,#0891b2); }
+    .avatar-grad-7 { background: linear-gradient(135deg,#84cc16,#16a34a); }
+
+    /* ── Account Table ── */
+    .account-table tr:nth-child(even) td { background: rgba(41,37,36,0.5); }
+    .account-table tr:hover td { background: rgba(251,146,60,0.08); }
+    .account-table td, .account-table th { padding: 10px 16px; }
+    .account-table th { color: #a8a29e; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .account-table td { color: #d6d3d1; font-size: 14px; }
+    .copy-btn {
+      font-size: 11px; padding: 3px 8px; border-radius: 6px;
+      background: rgba(251,146,60,0.15); color: #fb923c;
+      border: 1px solid rgba(251,146,60,0.3);
+      cursor: pointer; transition: background 0.15s;
+    }
+    .copy-btn:hover { background: rgba(251,146,60,0.3); }
+
+    /* ── Section divider ── */
+    .section-divider {
+      width: 48px; height: 3px; border-radius: 9px;
+      background: linear-gradient(90deg,#f97316,#fb923c);
+      margin: 0 auto 32px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="img/logo_bbfk.png" alt="성서침례교회 로고" class="logo-img" />
+        <span class="font-bold text-white tracking-tight" style="font-size:30px;">성서침례교회</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <div class="nav-dropdown"><a href="about.html" class="nav-link flex items-center gap-1">소개 <iconify-icon icon="solar:alt-arrow-down-linear" style="font-size:15px;margin-top:1px;"></iconify-icon></a><div class="nav-dropdown-menu"><a href="about.html"><iconify-icon icon="solar:buildings-2-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>교회 소개</a><a href="about-church.html"><iconify-icon icon="solar:book-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>성서침례교회란?</a></div></div>
+        <a href="worship.html" class="nav-link">예배</a>
+        <a href="programs.html" class="nav-link">사역</a>
+        <a href="mission.html" class="nav-link" style="color:#fb923c;">선교</a>
+        <a href="events.html" class="nav-link">행사</a>
+        <div class="nav-dropdown"><a href="community.html" class="nav-link flex items-center gap-1">공동체 <iconify-icon icon="solar:alt-arrow-down-linear" style="font-size:15px;margin-top:1px;"></iconify-icon></a><div class="nav-dropdown-menu"><a href="community.html"><iconify-icon icon="solar:users-group-rounded-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>공동체 소개</a><a href="album.html"><iconify-icon icon="solar:gallery-bold" style="font-size:15px;color:#fb923c;"></iconify-icon>사진 앨범</a></div></div>
+        <a href="contact.html" class="nav-link">오시는 길</a>
+      </div>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-stone-950 btn-shimmer">
+        <iconify-icon icon="solar:heart-bold" style="font-size:14px;"></iconify-icon>
+        함께 예배해요
+      </a>
+      <button id="mob-btn" class="md:hidden p-2 text-stone-400">
+        <iconify-icon icon="solar:hamburger-menu-linear" style="font-size:22px;"></iconify-icon>
+      </button>
+    </div>
+  </div>
+  <div id="mob-menu" class="hidden md:hidden border-t border-stone-800/50">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="about.html" class="text-stone-300 font-medium">소개</a>
+      <a href="about-church.html" class="text-stone-400 font-medium text-sm" style="padding-left:20px;">↳ 성서침례교회란?</a>
+      <a href="worship.html" class="text-stone-300 font-medium">예배</a>
+      <a href="programs.html" class="text-stone-300 font-medium">사역</a>
+      <a href="mission.html" class="text-stone-300 font-medium">선교</a>
+      <a href="events.html" class="text-stone-300 font-medium">행사</a>
+      <a href="community.html" class="text-stone-300 font-medium">공동체</a>
+      <a href="album.html" class="text-stone-400 font-medium text-sm" style="padding-left:20px;">↳ 사진 앨범</a>
+      <a href="contact.html" class="text-stone-300 font-medium">오시는 길</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-32 pb-20 overflow-hidden hero-grain">
+  <div class="hero-bg"></div>
+  <div class="grid-overlay"></div>
+  <div class="orb orb-1" style="top:-10%;left:65%;"></div>
+  <div class="orb orb-2" style="top:20%;left:10%;"></div>
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <div class="pill-badge mb-8 animate-fade-in inline-flex">
+      <iconify-icon icon="solar:global-bold" style="font-size:13px;"></iconify-icon>
+      세계 선교 · 14 선교사 파송
+    </div>
+    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-tight mb-6 animate-fade-up">
+      <span class="text-white">땅 끝까지</span><br/>
+      <span class="text-gold-gradient">복음을 전하라</span>
+    </h1>
+    <p class="text-stone-400 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto animate-fade-up">
+      "오직 성령이 너희에게 임하시면 너희가 권능을 받고 예루살렘과<br class="hidden sm:block"/>
+      온 유대와 사마리아와 땅 끝까지 이르러 내 증인이 되리라" — 사도행전 1:8
+    </p>
+    <!-- Stats -->
+    <div class="mt-12 flex flex-wrap justify-center gap-6 animate-fade-up">
+      <div class="px-6 py-4 rounded-2xl bg-stone-900/60 border border-stone-800/60">
+        <div class="text-3xl font-black text-gold-gradient">14</div>
+        <div class="text-stone-500 text-sm mt-1">파송 선교사</div>
+      </div>
+      <div class="px-6 py-4 rounded-2xl bg-stone-900/60 border border-stone-800/60">
+        <div class="text-3xl font-black text-gold-gradient">11</div>
+        <div class="text-stone-500 text-sm mt-1">선교 국가</div>
+      </div>
+      <div class="px-6 py-4 rounded-2xl bg-stone-900/60 border border-stone-800/60">
+        <div class="text-3xl font-black text-gold-gradient">4대륙</div>
+        <div class="text-stone-500 text-sm mt-1">아시아·아프리카·중동·중남미</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD MAP -->
+<section class="py-16 relative">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="text-center mb-10">
+      <div class="pill-badge mb-4 inline-flex mx-auto">
+        <iconify-icon icon="solar:map-bold" style="font-size:12px;"></iconify-icon>
+        선교지 지도
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-3">세계 선교지 현황</h2>
+      <p class="text-stone-500 text-sm">✝ 아이콘 위에 마우스를 올리면 선교사 정보를 확인할 수 있습니다</p>
+    </div>
+    <div class="rounded-2xl border border-stone-800/60 bg-stone-900/40 p-4 sm:p-6 backdrop-blur-sm">
+      <div id="world-map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLTIP (fixed, appended to body) -->
+<div id="map-tooltip">
+  <div class="tip-country" id="tip-country"></div>
+  <div id="tip-missionaries"></div>
+</div>
+
+<!-- MISSIONARY CARDS -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="pill-badge mb-4 inline-flex mx-auto">
+        <iconify-icon icon="solar:users-group-rounded-bold" style="font-size:12px;"></iconify-icon>
+        파송 선교사
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-3">함께하는 선교사들</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- 아시아 -->
+    <div class="mb-14">
+      <div class="flex items-center gap-3 mb-7">
+        <div class="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
+          <iconify-icon icon="solar:global-bold" style="font-size:16px;color:#fb923c;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-bold text-white">아시아</h3>
+        <div class="flex-1 h-px bg-stone-800/60"></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- M국 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇲🇾</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">M국</div>
+              <div class="text-stone-500 text-xs mt-0.5">말레이시아</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            동남아시아의 다민족 국가로 이슬람이 국교이며, 말레이계·중국계·인도계가 공존하는 복잡한 종교 지형 속에서 복음을 전하고 있습니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-1">김</div>
+            <div>
+              <div class="text-white font-semibold text-sm">김아벨</div>
+              <div class="text-stone-500 text-xs">M국 선교사</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 미얀마 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇲🇲</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">미얀마</div>
+              <div class="text-stone-500 text-xs mt-0.5">Myanmar</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            상좌부 불교가 깊이 뿌리내린 나라로, 정치적 불안정 속에서도 민족들에게 복음의 빛을 전하는 사역이 이어지고 있습니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-2">김</div>
+            <div>
+              <div class="text-white font-semibold text-sm">김연규</div>
+              <div class="text-stone-500 text-xs">미얀마 선교사</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 태국 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇹🇭</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">태국</div>
+              <div class="text-stone-500 text-xs mt-0.5">Thailand</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            불교문화가 국가 정체성과 깊이 연결된 나라로, 전체 인구의 95%가 불교도입니다. 현지인들에게 예수 그리스도의 복음을 전하고 교회를 세웁니다.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+              <div class="missionary-avatar avatar-grad-3">김</div>
+              <div>
+                <div class="text-white font-semibold text-sm">김인태</div>
+                <div class="text-stone-500 text-xs">태국 선교사</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+              <div class="missionary-avatar avatar-grad-4">박</div>
+              <div>
+                <div class="text-white font-semibold text-sm">박형수</div>
+                <div class="text-stone-500 text-xs">태국 선교사</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 몽골 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇲🇳</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">몽골</div>
+              <div class="text-stone-500 text-xs mt-0.5">Mongolia</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            유목 문화와 티베트 불교, 샤머니즘이 혼재하는 광활한 대륙의 나라입니다. 혹독한 기후 속에서도 복음의 씨앗이 뿌려지고 있습니다.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+              <div class="missionary-avatar avatar-grad-5">도</div>
+              <div>
+                <div class="text-white font-semibold text-sm">도현용</div>
+                <div class="text-stone-500 text-xs">몽골 선교사</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+              <div class="missionary-avatar avatar-grad-6">여</div>
+              <div>
+                <div class="text-white font-semibold text-sm">여병무</div>
+                <div class="text-stone-500 text-xs">몽골 선교사</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 인도네시아 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇮🇩</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">인도네시아</div>
+              <div class="text-stone-500 text-xs mt-0.5">Indonesia</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            세계 최대의 이슬람 인구를 보유한 군도 국가로 17,000여 개의 섬과 300여 민족이 살고 있습니다. 풍성한 열매를 위해 기도합니다.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+              <div class="missionary-avatar avatar-grad-7">배</div>
+              <div>
+                <div class="text-white font-semibold text-sm">배성현</div>
+                <div class="text-stone-500 text-xs">인도네시아 선교사</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+              <div class="missionary-avatar avatar-grad-1">이</div>
+              <div>
+                <div class="text-white font-semibold text-sm">이지성</div>
+                <div class="text-stone-500 text-xs">인도네시아 선교사</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 캄보디아 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇰🇭</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">캄보디아</div>
+              <div class="text-stone-500 text-xs mt-0.5">Cambodia</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            소승불교를 국교로 하며 크메르 루주의 역사적 상처를 안고 있는 나라입니다. 치유와 회복의 복음이 절실히 필요합니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-2">손</div>
+            <div>
+              <div class="text-white font-semibold text-sm">손춘영</div>
+              <div class="text-stone-500 text-xs">캄보디아 선교사</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C국 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇨🇳</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">C국</div>
+              <div class="text-stone-500 text-xs mt-0.5">제한 접근 지역</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            세계 최대 인구를 가진 나라로 수많은 미전도 종족이 있습니다. 제한된 환경 속에서도 지하교회와 함께 복음이 확산되고 있습니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-3">신</div>
+            <div>
+              <div class="text-white font-semibold text-sm">신수호</div>
+              <div class="text-stone-500 text-xs">C국 선교사</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 00국 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🌏</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">00국</div>
+              <div class="text-stone-500 text-xs mt-0.5">보안상 비공개 지역</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            복음 전파에 제약이 많은 지역으로 선교사의 안전을 위해 국가명을 비공개합니다. 지속적인 기도와 후원이 선교사에게 큰 힘이 됩니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-4">노</div>
+            <div>
+              <div class="text-white font-semibold text-sm">노을</div>
+              <div class="text-stone-500 text-xs">비공개 지역 선교사</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- R국 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇷🇺</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">R국</div>
+              <div class="text-stone-500 text-xs mt-0.5">동유럽·중앙아시아</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            동방정교회 전통이 깊게 자리잡은 광대한 나라입니다. 급변하는 사회 속에서 복음적 신앙의 문이 열리도록 사역하고 있습니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-5">이</div>
+            <div>
+              <div class="text-white font-semibold text-sm">이한상</div>
+              <div class="text-stone-500 text-xs">R국 선교사</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 아프리카 -->
+    <div class="mb-14">
+      <div class="flex items-center gap-3 mb-7">
+        <div class="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
+          <iconify-icon icon="solar:sun-bold" style="font-size:16px;color:#fb923c;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-bold text-white">아프리카</h3>
+        <div class="flex-1 h-px bg-stone-800/60"></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 가나 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇬🇭</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">가나</div>
+              <div class="text-stone-500 text-xs mt-0.5">Ghana · West Africa</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            서아프리카의 민주주의 국가로 기독교와 이슬람이 공존합니다. 지역 교회 개척과 제자 훈련을 통해 아프리카 복음화의 거점을 세워가고 있습니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-6">임</div>
+            <div>
+              <div class="text-white font-semibold text-sm">임철순</div>
+              <div class="text-stone-500 text-xs">가나 선교사</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 중남미 -->
+    <div class="mb-4">
+      <div class="flex items-center gap-3 mb-7">
+        <div class="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
+          <iconify-icon icon="solar:star-bold" style="font-size:16px;color:#fb923c;"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-bold text-white">중남미</h3>
+        <div class="flex-1 h-px bg-stone-800/60"></div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 멕시코 -->
+        <div class="mission-card p-6">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="mission-flag">🇲🇽</div>
+            <div>
+              <div class="text-white font-bold text-lg leading-tight">멕시코</div>
+              <div class="text-stone-500 text-xs mt-0.5">Mexico · Latin America</div>
+            </div>
+          </div>
+          <p class="text-stone-400 text-sm leading-relaxed mb-5">
+            라틴아메리카의 대국으로 가톨릭 문화가 지배적이나 복음주의 기독교의 성장이 두드러집니다. 현지인 교역자 양성과 교회 개척에 집중하고 있습니다.
+          </p>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-stone-800/50 border border-stone-700/40">
+            <div class="missionary-avatar avatar-grad-7">추</div>
+            <div>
+              <div class="text-white font-semibold text-sm">추기성</div>
+              <div class="text-stone-500 text-xs">멕시코 선교사</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DONATION ACCOUNTS -->
+<section class="py-20 bg-stone-950/50">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="pill-badge mb-4 inline-flex mx-auto">
+        <iconify-icon icon="solar:hand-heart-bold" style="font-size:12px;"></iconify-icon>
+        선교 후원
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-3">선교사 후원 계좌</h2>
+      <p class="text-stone-500 text-sm max-w-lg mx-auto leading-relaxed">
+        여러분의 작은 헌신이 땅 끝까지 복음을 전하는 데 귀하게 쓰입니다.<br/>
+        아래 계좌로 선교사님을 직접 후원하실 수 있습니다.
+      </p>
+      <div class="section-divider mt-6"></div>
+    </div>
+
+    <!-- 국민은행 Badge -->
+    <div class="flex items-center justify-center gap-3 mb-8">
+      <div class="px-5 py-2.5 rounded-full bg-stone-800/80 border border-stone-700/60 flex items-center gap-2">
+        <iconify-icon icon="solar:bank-bold" style="font-size:16px;color:#fb923c;"></iconify-icon>
+        <span class="text-stone-300 text-sm font-semibold">국민은행 (KB)</span>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-stone-800/60 bg-stone-900/50 overflow-hidden">
+      <table class="account-table w-full border-collapse">
+        <thead>
+          <tr class="border-b border-stone-800/60">
+            <th class="text-left">선교사</th>
+            <th class="text-left">선교지</th>
+            <th class="text-left">계좌번호 (국민은행)</th>
+            <th class="text-center hidden sm:table-cell">복사</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="font-semibold text-stone-200">김아벨</td><td>M국</td><td class="font-mono text-stone-300">230190-29-012194</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012194','김아벨')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">김연규</td><td>미얀마</td><td class="font-mono text-stone-300">230190-29-012040</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012040','김연규')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">김인태</td><td>태국</td><td class="font-mono text-stone-300">230190-29-012053</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012053','김인태')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">노을</td><td>00국</td><td class="font-mono text-stone-300">230190-29-012079</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012079','노을')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">도현용</td><td>몽골</td><td class="font-mono text-stone-300">230190-29-012082</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012082','도현용')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">박형수</td><td>태국</td><td class="font-mono text-stone-300">230190-29-012107</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012107','박형수')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">배성현</td><td>인도네시아</td><td class="font-mono text-stone-300">230190-29-012110</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012110','배성현')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">손춘영</td><td>캄보디아</td><td class="font-mono text-stone-300">230190-29-012123</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012123','손춘영')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">신수호</td><td>C국</td><td class="font-mono text-stone-300">230190-29-012219</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012219','신수호')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">여병무</td><td>몽골</td><td class="font-mono text-stone-300">230190-29-012136</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012136','여병무')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">이지성</td><td>인도네시아</td><td class="font-mono text-stone-300">230190-29-012149</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012149','이지성')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">이한상</td><td>R국</td><td class="font-mono text-stone-300">230190-29-012152</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012152','이한상')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">임철순</td><td>가나</td><td class="font-mono text-stone-300">230190-29-012165</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012165','임철순')">복사</button></td></tr>
+          <tr><td class="font-semibold text-stone-200">추기성</td><td>멕시코</td><td class="font-mono text-stone-300">230190-29-012178</td><td class="text-center hidden sm:table-cell"><button class="copy-btn" onclick="copyAccount('230190-29-012178','추기성')">복사</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-stone-600 text-xs text-center mt-4">
+      * 입금 시 선교사 이름을 메모란에 기재해 주세요. 모든 계좌는 국민은행입니다.
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 relative overflow-hidden">
+  <div class="orb orb-1" style="opacity:0.4;"></div>
+  <div class="relative z-10 max-w-3xl mx-auto px-6 text-center reveal">
+    <span class="pill-badge mb-6 mx-auto w-fit">선교를 위한 기도</span>
+    <h2 class="text-4xl lg:text-5xl font-black tracking-tight mb-6">
+      <span class="text-white">함께 기도하고</span><br/>
+      <span class="text-gold-gradient">함께 보내는 교회</span>
+    </h2>
+    <p class="text-stone-400 text-lg mb-10 leading-relaxed">
+      선교사들은 여러분의 기도와 후원으로 사역합니다.<br/>
+      매주 예배에서 선교사들을 위해 함께 기도해 주세요.
+    </p>
+    <a href="contact.html" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-stone-950 btn-shimmer shadow-lg">
+      <iconify-icon icon="solar:map-point-bold" style="font-size:18px;"></iconify-icon>
+      교회 방문하기
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-stone-800/60 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="img/logo_bbfk.png" alt="성서침례교회 로고" class="logo-img" />
+          <span class="font-bold text-lg text-white">성서침례교회</span>
+        </div>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-xs">하나님의 사랑으로 함께 피어나는 공동체.<br/>모든 사람을 환영합니다.</p>
+      </div>
+      <div>
+        <div class="footer-label">메뉴</div>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="footer-link">교회 소개</a></li>
+          <li><a href="worship.html" class="footer-link">예배 안내</a></li>
+          <li><a href="programs.html" class="footer-link">사역</a></li>
+          <li><a href="mission.html" class="footer-link">선교</a></li>
+          <li><a href="events.html" class="footer-link">행사</a></li>
+          <li><a href="community.html" class="footer-link">공동체</a></li>
+          <li><a href="contact.html" class="footer-link">오시는 길</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-label">연락처</div>
+        <ul class="space-y-2">
+          <li class="text-stone-500 text-sm">서울 마포구 합정동</li>
+          <li class="text-stone-500 text-sm">02-1234-5678</li>
+          <li class="text-stone-500 text-sm">hello@joychurch.kr</li>
+          <li class="text-stone-500 text-sm">주일 11:00 AM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-stone-800/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-stone-600 text-sm">© 2026 성서침례교회. All rights reserved.</p>
+      <p class="text-stone-700 text-xs">"내게 능력 주시는 자 안에서 내가 모든 것을 할 수 있느니라" — 빌립보서 4:13</p>
+    </div>
+  </div>
+</footer>
+
+<!-- COPY TOAST -->
+<div id="copy-toast" style="
+  position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:rgba(28,25,23,0.97); border:1px solid rgba(251,146,60,0.5);
+  color:#fb923c; font-size:14px; font-weight:600;
+  padding:10px 22px; border-radius:100px;
+  opacity:0; transition:all 0.3s; pointer-events:none; z-index:999;
+">계좌번호가 복사되었습니다 ✓</div>
+
+<script src="shared.js"></script>
+
+<script>
+// ── Missionary data for map tooltips ──
+const missionData = [
+  {
+    key: 'MY', label: 'M국 (말레이시아)',
+    coords: [3.5, 109.7],
+    missionaries: [{ name: '김아벨', role: 'M국 선교사' }]
+  },
+  {
+    key: 'MM', label: '미얀마',
+    coords: [19, 96.2],
+    missionaries: [{ name: '김연규', role: '미얀마 선교사' }]
+  },
+  {
+    key: 'TH', label: '태국',
+    coords: [13.5, 100.9],
+    missionaries: [
+      { name: '김인태', role: '태국 선교사' },
+      { name: '박형수', role: '태국 선교사' }
+    ]
+  },
+  {
+    key: 'MN', label: '몽골',
+    coords: [46.8, 103.8],
+    missionaries: [
+      { name: '도현용', role: '몽골 선교사' },
+      { name: '여병무', role: '몽골 선교사' }
+    ]
+  },
+  {
+    key: 'ID', label: '인도네시아',
+    coords: [-3, 117.8],
+    missionaries: [
+      { name: '배성현', role: '인도네시아 선교사' },
+      { name: '이지성', role: '인도네시아 선교사' }
+    ]
+  },
+  {
+    key: 'KH', label: '캄보디아',
+    coords: [12.6, 104.9],
+    missionaries: [{ name: '손춘영', role: '캄보디아 선교사' }]
+  },
+  {
+    key: 'CN', label: 'C국',
+    coords: [35.5, 103.5],
+    missionaries: [{ name: '신수호', role: 'C국 선교사' }]
+  },
+  {
+    key: 'RU', label: 'R국',
+    coords: [60.5, 86.5],
+    missionaries: [{ name: '이한상', role: 'R국 선교사' }]
+  },
+  {
+    key: 'GH', label: '가나',
+    coords: [7.9, -1.0],
+    missionaries: [{ name: '임철순', role: '가나 선교사' }]
+  },
+  {
+    key: 'MX', label: '멕시코',
+    coords: [23.6, -102.5],
+    missionaries: [{ name: '추기성', role: '멕시코 선교사' }]
+  }
+];
+
+// ── Init jsvectormap ──
+const map = new jsVectorMap({
+  selector: '#world-map',
+  map: 'world',
+  backgroundColor: 'transparent',
+  zoomButtons: false,
+  zoomOnScroll: false,
+  regionStyle: {
+    initial: { fill: '#292524', stroke: '#1c1917', strokeWidth: 0.5 },
+    hover: { fill: '#44403c', cursor: 'default' },
+    selected: { fill: '#7c3a1a' },
+    selectedHover: { fill: '#9a4a22' }
+  },
+  selectedRegions: missionData.map(d => d.key),
+  markers: missionData.map((d, i) => ({
+    coords: d.coords,
+    name: d.label
+  })),
+  markerStyle: {
+    initial: { r: 6, fill: '#f97316', stroke: '#fff', strokeWidth: 1.5 },
+    hover: { r: 8, fill: '#fbbf24' }
+  },
+  onMarkerOver(e, index) {
+    const d = missionData[index];
+    if (!d) return;
+    const tipEl = document.getElementById('map-tooltip');
+    document.getElementById('tip-country').textContent = '✝  ' + d.label;
+    const html = d.missionaries.map(m =>
+      `<div class="tip-row"><span class="tip-name">${m.name}</span> · ${m.role}</div>`
+    ).join('');
+    document.getElementById('tip-missionaries').innerHTML = html;
+    tipEl.style.display = 'block';
+    positionTooltip(e);
+  },
+  onMarkerOut(e, index) {
+    document.getElementById('map-tooltip').style.display = 'none';
+  }
+});
+
+// Position tooltip near cursor
+document.getElementById('world-map').addEventListener('mousemove', positionTooltip);
+function positionTooltip(e) {
+  const tip = document.getElementById('map-tooltip');
+  if (tip.style.display === 'none') return;
+  const x = e.clientX + 18;
+  const y = e.clientY - 20;
+  const tw = tip.offsetWidth;
+  const th = tip.offsetHeight;
+  tip.style.left = (x + tw > window.innerWidth - 10 ? e.clientX - tw - 18 : x) + 'px';
+  tip.style.top  = (y + th > window.innerHeight - 10 ? e.clientY - th - 10 : y) + 'px';
+}
+
+// ── After map renders: replace circle markers with ✝ cross symbols ──
+setTimeout(() => {
+  const svgEl = document.querySelector('#world-map svg');
+  if (!svgEl) return;
+  const circles = svgEl.querySelectorAll('.jvm-marker');
+  circles.forEach((circle, i) => {
+    const cx = parseFloat(circle.getAttribute('cx') || circle.getAttribute('x') || 0);
+    const cy = parseFloat(circle.getAttribute('cy') || circle.getAttribute('y') || 0);
+    // Hide the original circle
+    circle.setAttribute('r', '0');
+    circle.style.display = 'none';
+    // Create ✝ text element
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', cx);
+    text.setAttribute('y', cy + 7);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('font-size', '20');
+    text.setAttribute('font-weight', 'bold');
+    text.setAttribute('fill', '#f97316');
+    text.setAttribute('class', 'mission-cross');
+    text.setAttribute('data-index', i);
+    text.setAttribute('style', 'cursor:pointer;');
+    text.textContent = '✝';
+    svgEl.appendChild(text);
+
+    // Add hover events mirroring marker behavior
+    const d = missionData[i];
+    if (!d) return;
+    text.addEventListener('mouseenter', (e) => {
+      text.setAttribute('fill', '#fbbf24');
+      text.setAttribute('font-size', '24');
+      const tipEl = document.getElementById('map-tooltip');
+      document.getElementById('tip-country').textContent = '✝  ' + d.label;
+      const html = d.missionaries.map(m =>
+        `<div class="tip-row"><span class="tip-name">${m.name}</span> · ${m.role}</div>`
+      ).join('');
+      document.getElementById('tip-missionaries').innerHTML = html;
+      tipEl.style.display = 'block';
+      positionTooltip(e);
+    });
+    text.addEventListener('mousemove', positionTooltip);
+    text.addEventListener('mouseleave', () => {
+      text.setAttribute('fill', '#f97316');
+      text.setAttribute('font-size', '20');
+      document.getElementById('map-tooltip').style.display = 'none';
+    });
+  });
+}, 500);
+
+// ── Copy account number ──
+function copyAccount(account, name) {
+  navigator.clipboard.writeText(account).then(() => {
+    const toast = document.getElementById('copy-toast');
+    toast.textContent = `${name} 선교사 계좌번호가 복사되었습니다 ✓`;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
