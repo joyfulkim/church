@@ -15,6 +15,16 @@ document.querySelectorAll('.nav-link').forEach(link => {
   }
 });
 
+// Registration form
+function handleReg(e) {
+  e.preventDefault();
+  const input = document.getElementById('reg-name');
+  const success = document.getElementById('reg-success');
+  if (!input || !input.value.trim()) return;
+  input.closest('form').style.display = 'none';
+  success.classList.remove('hidden');
+}
+
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
