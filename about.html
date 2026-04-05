@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>교회 소개 — 기쁨의 교회</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Pretendard','sans-serif']},colors:{gold:{300:'#f2d9a3',400:'#e9c16a',500:'#dfa83a',600:'#c8901e',700:'#a97016'}}}}}</script>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="logo-icon"><iconify-icon icon="solar:star-bold" style="color:#0c0a08;font-size:16px;"></iconify-icon></div>
+        <span class="font-bold text-lg text-white tracking-tight">기쁨의 교회</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="about.html" class="nav-link">소개</a>
+        <a href="worship.html" class="nav-link">예배</a>
+        <a href="programs.html" class="nav-link">사역</a>
+        <a href="events.html" class="nav-link">행사</a>
+        <a href="community.html" class="nav-link">공동체</a>
+        <a href="contact.html" class="nav-link">오시는 길</a>
+      </div>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-stone-950 btn-shimmer">
+        <iconify-icon icon="solar:heart-bold" style="font-size:14px;"></iconify-icon>
+        함께 예배해요
+      </a>
+      <button id="mob-btn" class="md:hidden p-2 text-stone-400"><iconify-icon icon="solar:hamburger-menu-linear" style="font-size:22px;"></iconify-icon></button>
+    </div>
+  </div>
+  <div id="mob-menu" class="hidden md:hidden border-t border-stone-800/50">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="about.html" class="text-stone-300 font-medium">소개</a>
+      <a href="worship.html" class="text-stone-300 font-medium">예배</a>
+      <a href="programs.html" class="text-stone-300 font-medium">사역</a>
+      <a href="events.html" class="text-stone-300 font-medium">행사</a>
+      <a href="community.html" class="text-stone-300 font-medium">공동체</a>
+      <a href="contact.html" class="text-stone-300 font-medium">오시는 길</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero hero-grain">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="breadcrumb">
+      <a href="index.html">홈</a>
+      <span>›</span>
+      <span style="color:#e9c16a;">소개</span>
+    </div>
+    <span class="pill-badge mb-5">About Us</span>
+    <h1 class="text-4xl lg:text-6xl font-black tracking-tight leading-tight mb-5">
+      <span class="text-white">우리는</span><br/>
+      <span class="text-gold-gradient">하나님의 가족</span>
+      <span class="text-white">입니다</span>
+    </h1>
+    <p class="text-stone-400 text-lg max-w-2xl leading-relaxed">기쁨의 교회는 모든 세대가 함께 어우러져 하나님을 예배하고, 서로를 돌보며, 세상을 향해 복음을 전하는 건강한 공동체입니다.</p>
+  </div>
+</div>
+
+<!-- MISSION & VISION -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div class="reveal">
+        <span class="pill-badge mb-6">우리의 사명</span>
+        <h2 class="section-title text-white mb-6">
+          <span class="text-gold-gradient">사명</span>과 <span class="text-gold-gradient">비전</span>
+        </h2>
+        <div class="space-y-6">
+          <div class="block-quote">
+            <p class="text-stone-300 italic leading-relaxed">"예수 그리스도의 제자를 삼아 하나님 나라를 세우고, 지역과 세계를 섬기는 공동체"</p>
+          </div>
+          <p class="text-stone-400 leading-relaxed">우리는 성경 말씀 위에 세워진 교회로, 예수님의 사랑을 실천하고 성령의 인도하심을 따르는 제자들의 공동체를 꿈꿉니다.</p>
+          <p class="text-stone-400 leading-relaxed">2030년까지 소그룹 30개, 해외 선교사 5명 파송을 목표로 함께 성장해 나가고 있습니다.</p>
+        </div>
+      </div>
+      <div class="reveal space-y-4" style="animation-delay:0.12s;">
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="icon-box flex-shrink-0"><iconify-icon icon="solar:book-bold" style="color:#e9c16a;font-size:22px;"></iconify-icon></div>
+            <div>
+              <h3 class="font-bold text-white mb-2">말씀 중심</h3>
+              <p class="text-stone-400 text-sm leading-relaxed">성경을 삶의 유일한 기준으로 삼고, 말씀 위에 세워진 신앙과 삶을 추구합니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="icon-box flex-shrink-0"><iconify-icon icon="solar:heart-bold" style="color:#e9c16a;font-size:22px;"></iconify-icon></div>
+            <div>
+              <h3 class="font-bold text-white mb-2">사랑 실천</h3>
+              <p class="text-stone-400 text-sm leading-relaxed">예수님의 사랑을 받은 자로서 이웃과 지역사회, 세계를 향해 그 사랑을 흘려보냅니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="icon-box flex-shrink-0"><iconify-icon icon="solar:users-group-rounded-bold" style="color:#e9c16a;font-size:22px;"></iconify-icon></div>
+            <div>
+              <h3 class="font-bold text-white mb-2">공동체성</h3>
+              <p class="text-stone-400 text-sm leading-relaxed">소그룹 중심의 깊은 나눔과 관계를 통해 진정한 가족 공동체를 이루어 갑니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-bezel rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="icon-box flex-shrink-0"><iconify-icon icon="solar:globe-bold" style="color:#e9c16a;font-size:22px;"></iconify-icon></div>
+            <div>
+              <h3 class="font-bold text-white mb-2">선교 비전</h3>
+              <p class="text-stone-400 text-sm leading-relaxed">땅 끝까지 복음을 전하라는 주님의 명령을 따라 국내외 선교에 헌신합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- PASTOR -->
+<section class="py-24" style="background:#110e09;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-16">
+      <span class="pill-badge mb-5">담임 목사</span>
+      <h2 class="section-title text-white">인사말</h2>
+    </div>
+    <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-10 items-start reveal">
+      <div class="text-center">
+        <div class="w-40 h-40 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(200,144,30,0.15),rgba(138,85,20,0.1));border:1px solid rgba(200,144,30,0.2);">
+          <iconify-icon icon="solar:user-circle-bold" style="color:rgba(200,144,30,0.4);font-size:80px;"></iconify-icon>
+        </div>
+        <div class="font-bold text-white text-lg">김요한 목사</div>
+        <div class="text-gold-600 text-sm font-medium mt-1">담임목사</div>
+        <div class="text-stone-500 text-xs mt-2 leading-relaxed">총신대학교 신학대학원<br/>M.Div. 졸업</div>
+      </div>
+      <div class="md:col-span-2 space-y-4">
+        <div class="quote-mark text-4xl leading-none mb-2" style="font-family:Georgia,serif;color:rgba(200,144,30,0.2);">"</div>
+        <p class="text-stone-300 leading-relaxed">기쁨의 교회를 방문해 주신 모든 분을 진심으로 환영합니다.</p>
+        <p class="text-stone-400 leading-relaxed">우리 교회는 어떤 모습이든, 어떤 배경을 가지고 오시든 그 자리에서 하나님의 사랑을 경험할 수 있도록 문을 열어 두고 있습니다. 상처받은 마음도, 지친 영혼도 이곳에서 안식과 치유를 얻을 수 있습니다.</p>
+        <p class="text-stone-400 leading-relaxed">말씀을 통해 자라고, 예배를 통해 회복되며, 공동체를 통해 연결되는 건강한 신앙 생활을 기쁨의 교회에서 함께 누리시길 바랍니다.</p>
+        <p class="text-stone-300 font-semibold mt-6">— 담임목사 김요한</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- HISTORY -->
+<section class="py-24">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-16">
+      <span class="pill-badge mb-5">역사</span>
+      <h2 class="section-title text-white">교회 연혁</h2>
+    </div>
+    <div class="space-y-6 reveal">
+      <div class="flex gap-6 items-start">
+        <div class="flex-shrink-0 text-right w-20">
+          <span class="text-gold-500 font-bold text-sm">2024</span>
+        </div>
+        <div class="w-px bg-gradient-to-b from-gold-600/50 to-transparent self-stretch mx-2 flex-shrink-0" style="min-height:60px;"></div>
+        <div class="card-bezel rounded-xl p-5 flex-1">
+          <div class="font-bold text-white mb-1">기쁨의 교회 창립</div>
+          <p class="text-stone-400 text-sm">서울 마포구 합정동에서 30명의 성도와 함께 창립 예배를 드림</p>
+        </div>
+      </div>
+      <div class="flex gap-6 items-start">
+        <div class="flex-shrink-0 text-right w-20"><span class="text-gold-500 font-bold text-sm">2024</span></div>
+        <div class="w-px bg-gradient-to-b from-gold-600/40 to-transparent self-stretch mx-2 flex-shrink-0" style="min-height:60px;"></div>
+        <div class="card-bezel rounded-xl p-5 flex-1">
+          <div class="font-bold text-white mb-1">첫 소그룹 출범</div>
+          <p class="text-stone-400 text-sm">지역별 소그룹 3개 출범. 공동체 기반 신앙 생활 시작</p>
+        </div>
+      </div>
+      <div class="flex gap-6 items-start">
+        <div class="flex-shrink-0 text-right w-20"><span class="text-gold-500 font-bold text-sm">2025</span></div>
+        <div class="w-px bg-gradient-to-b from-gold-600/40 to-transparent self-stretch mx-2 flex-shrink-0" style="min-height:60px;"></div>
+        <div class="card-bezel rounded-xl p-5 flex-1">
+          <div class="font-bold text-white mb-1">청년부 독립 출범</div>
+          <p class="text-stone-400 text-sm">20-30대 청년들을 위한 청년부 예배 및 공동체 공식 출범</p>
+        </div>
+      </div>
+      <div class="flex gap-6 items-start">
+        <div class="flex-shrink-0 text-right w-20"><span class="text-gold-500 font-bold text-sm">2025</span></div>
+        <div class="w-px bg-gradient-to-b from-gold-600/40 to-transparent self-stretch mx-2 flex-shrink-0" style="min-height:60px;"></div>
+        <div class="card-bezel rounded-xl p-5 flex-1">
+          <div class="font-bold text-white mb-1">성도 300명 돌파</div>
+          <p class="text-stone-400 text-sm">창립 1년 반 만에 성도 300명 돌파, 소그룹 8개로 확장</p>
+        </div>
+      </div>
+      <div class="flex gap-6 items-start">
+        <div class="flex-shrink-0 text-right w-20"><span class="text-gold-500 font-bold text-sm">2026</span></div>
+        <div class="mx-2 flex-shrink-0" style="width:1px;"></div>
+        <div class="card-bezel rounded-xl p-5 flex-1" style="border-color:rgba(200,144,30,0.35);">
+          <div class="flex items-center gap-3 mb-1">
+            <div class="font-bold text-white">현재 — 함께 성장 중</div>
+            <span class="tag tag-green">진행 중</span>
+          </div>
+          <p class="text-stone-400 text-sm">성도 500+, 소그룹 12개, 사역팀 5개로 지속 성장</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="py-16" style="background:#110e09;">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 reveal stagger">
+      <div class="card-bezel rounded-2xl p-6 text-center">
+        <div class="text-4xl font-black text-gold-gradient mb-2">500+</div>
+        <div class="text-stone-400 text-sm">등록 성도</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6 text-center">
+        <div class="text-4xl font-black text-gold-gradient mb-2">12</div>
+        <div class="text-stone-400 text-sm">소그룹</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6 text-center">
+        <div class="text-4xl font-black text-gold-gradient mb-2">5</div>
+        <div class="text-stone-400 text-sm">사역팀</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6 text-center">
+        <div class="text-4xl font-black text-gold-gradient mb-2">2</div>
+        <div class="text-stone-400 text-sm">해외 선교사</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-stone-800/60 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="logo-icon"><iconify-icon icon="solar:star-bold" style="color:#0c0a08;font-size:16px;"></iconify-icon></div>
+          <span class="font-bold text-lg text-white">기쁨의 교회</span>
+        </div>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-xs">하나님의 사랑으로 함께 피어나는 공동체.<br/>모든 사람을 환영합니다.</p>
+      </div>
+      <div>
+        <div class="footer-label">메뉴</div>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="footer-link">교회 소개</a></li>
+          <li><a href="worship.html" class="footer-link">예배 안내</a></li>
+          <li><a href="programs.html" class="footer-link">사역</a></li>
+          <li><a href="events.html" class="footer-link">행사</a></li>
+          <li><a href="community.html" class="footer-link">공동체</a></li>
+          <li><a href="contact.html" class="footer-link">오시는 길</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-label">연락처</div>
+        <ul class="space-y-2">
+          <li class="text-stone-500 text-sm">서울 마포구 합정동</li>
+          <li class="text-stone-500 text-sm">02-1234-5678</li>
+          <li class="text-stone-500 text-sm">hello@joychurch.kr</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-stone-800/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-stone-600 text-sm">© 2026 기쁨의 교회. All rights reserved.</p>
+      <p class="text-stone-700 text-xs">"내게 능력 주시는 자 안에서" — 빌립보서 4:13</p>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

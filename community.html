@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공동체 — 기쁨의 교회</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Pretendard','sans-serif']},colors:{gold:{300:'#f2d9a3',400:'#e9c16a',500:'#dfa83a',600:'#c8901e',700:'#a97016'}}}}}</script>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="logo-icon"><iconify-icon icon="solar:star-bold" style="color:#0c0a08;font-size:16px;"></iconify-icon></div>
+        <span class="font-bold text-lg text-white tracking-tight">기쁨의 교회</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="about.html" class="nav-link">소개</a>
+        <a href="worship.html" class="nav-link">예배</a>
+        <a href="programs.html" class="nav-link">사역</a>
+        <a href="events.html" class="nav-link">행사</a>
+        <a href="community.html" class="nav-link">공동체</a>
+        <a href="contact.html" class="nav-link">오시는 길</a>
+      </div>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-stone-950 btn-shimmer">
+        <iconify-icon icon="solar:heart-bold" style="font-size:14px;"></iconify-icon>
+        함께 예배해요
+      </a>
+      <button id="mob-btn" class="md:hidden p-2 text-stone-400"><iconify-icon icon="solar:hamburger-menu-linear" style="font-size:22px;"></iconify-icon></button>
+    </div>
+  </div>
+  <div id="mob-menu" class="hidden md:hidden border-t border-stone-800/50">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="about.html" class="text-stone-300 font-medium">소개</a>
+      <a href="worship.html" class="text-stone-300 font-medium">예배</a>
+      <a href="programs.html" class="text-stone-300 font-medium">사역</a>
+      <a href="events.html" class="text-stone-300 font-medium">행사</a>
+      <a href="community.html" class="text-stone-300 font-medium">공동체</a>
+      <a href="contact.html" class="text-stone-300 font-medium">오시는 길</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero hero-grain">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="breadcrumb"><a href="index.html">홈</a><span>›</span><span style="color:#e9c16a;">공동체</span></div>
+    <span class="pill-badge mb-5">Community</span>
+    <h1 class="text-4xl lg:text-6xl font-black tracking-tight leading-tight mb-5">
+      <span class="text-white">변화된</span><br/>
+      <span class="text-gold-gradient">삶의 이야기</span>
+    </h1>
+    <p class="text-stone-400 text-lg max-w-xl leading-relaxed">기쁨의 교회 성도들이 경험한 하나님의 이야기를 나눕니다.</p>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="reveal mb-16">
+      <span class="pill-badge mb-5">성도 간증</span>
+      <h2 class="section-title text-white">성도들의 이야기</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal stagger">
+      <div class="card-bezel rounded-2xl p-8">
+        <div style="font-size:3.5rem;line-height:1;color:rgba(200,144,30,0.2);font-family:Georgia,serif;" class="mb-3">"</div>
+        <p class="text-stone-300 leading-relaxed mb-7 text-sm">기쁨의 교회에 온 후 처음으로 진정한 가족 같은 공동체를 느꼈습니다. 소그룹 모임에서 나눈 이야기들이 제 삶을 바꿨어요. 혼자가 아니라는 것을 알게 됐습니다.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-stone-950 font-bold text-sm" style="background:linear-gradient(135deg,#c8901e,#e9c16a);">김</div>
+          <div><div class="text-white font-semibold text-sm">김지은</div><div class="text-stone-500 text-xs">3년째 성도 · 소그룹 리더</div></div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-8">
+        <div style="font-size:3.5rem;line-height:1;color:rgba(200,144,30,0.2);font-family:Georgia,serif;" class="mb-3">"</div>
+        <p class="text-stone-300 leading-relaxed mb-7 text-sm">찬양 팀에 합류하고 나서 예배가 완전히 달라졌습니다. 함께 하나님을 섬긴다는 것이 이렇게 기쁜 일인지 몰랐어요. 매주 토요일 연습이 기다려집니다.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-stone-950 font-bold text-sm" style="background:linear-gradient(135deg,#c8901e,#e9c16a);">박</div>
+          <div><div class="text-white font-semibold text-sm">박민준</div><div class="text-stone-500 text-xs">2년째 성도 · 찬양팀 기타</div></div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-8">
+        <div style="font-size:3.5rem;line-height:1;color:rgba(200,144,30,0.2);font-family:Georgia,serif;" class="mb-3">"</div>
+        <p class="text-stone-300 leading-relaxed mb-7 text-sm">결혼 후 새로운 동네에서 혼자였는데, 기쁨의 교회 가족들이 진심으로 품어줬습니다. 이제 이곳이 제 고향 같아요.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-stone-950 font-bold text-sm" style="background:linear-gradient(135deg,#c8901e,#e9c16a);">이</div>
+          <div><div class="text-white font-semibold text-sm">이수진</div><div class="text-stone-500 text-xs">1년째 성도 · 봉사 팀</div></div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-8">
+        <div style="font-size:3.5rem;line-height:1;color:rgba(200,144,30,0.2);font-family:Georgia,serif;" class="mb-3">"</div>
+        <p class="text-stone-300 leading-relaxed mb-7 text-sm">신앙이 흔들리던 시기에 이 교회를 만났습니다. 말씀 중심의 설교와 진실한 공동체가 저를 다시 붙잡아줬어요. 하나님이 이 교회를 통해 저를 회복시켜 주셨습니다.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-stone-950 font-bold text-sm" style="background:linear-gradient(135deg,#c8901e,#e9c16a);">최</div>
+          <div><div class="text-white font-semibold text-sm">최현우</div><div class="text-stone-500 text-xs">2년째 성도</div></div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-8">
+        <div style="font-size:3.5rem;line-height:1;color:rgba(200,144,30,0.2);font-family:Georgia,serif;" class="mb-3">"</div>
+        <p class="text-stone-300 leading-relaxed mb-7 text-sm">청년부 수련회에서 처음으로 하나님을 인격적으로 만났습니다. 그 이후로 삶의 방향이 완전히 바뀌었어요. 정말 감사한 시간이었습니다.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-stone-950 font-bold text-sm" style="background:linear-gradient(135deg,#c8901e,#e9c16a);">정</div>
+          <div><div class="text-white font-semibold text-sm">정다은</div><div class="text-stone-500 text-xs">청년부 · 1년째 성도</div></div>
+        </div>
+      </div>
+      <div class="card-bezel rounded-2xl p-8">
+        <div style="font-size:3.5rem;line-height:1;color:rgba(200,144,30,0.2);font-family:Georgia,serif;" class="mb-3">"</div>
+        <p class="text-stone-300 leading-relaxed mb-7 text-sm">어린이 사역 교사로 섬기면서 오히려 제가 더 많이 배우고 있습니다. 아이들을 통해 순수한 믿음이 무엇인지 매주 배웁니다.</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-stone-950 font-bold text-sm" style="background:linear-gradient(135deg,#c8901e,#e9c16a);">강</div>
+          <div><div class="text-white font-semibold text-sm">강미래</div><div class="text-stone-500 text-xs">4년째 성도 · 주일학교 교사</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- SMALL GROUPS -->
+<section class="py-24" style="background:#110e09;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-16">
+      <span class="pill-badge mb-5">소그룹</span>
+      <h2 class="section-title text-white">나에게 맞는 소그룹 찾기</h2>
+      <p class="text-stone-400 mt-4 max-w-lg mx-auto">지역별, 연령별, 관심사별로 다양한 소그룹이 운영됩니다.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal stagger">
+      <div class="card-bezel rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-white">합정·망원 소그룹</h3>
+          <span class="tag tag-green">모집 중</span>
+        </div>
+        <p class="text-stone-400 text-sm mb-4 leading-relaxed">합정동·망원동 지역 성도들을 위한 소그룹. 매주 목요일 저녁 모임.</p>
+        <div class="text-stone-500 text-xs">인원 8/15 · 목요일 오후 8시</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-white">홍대·상수 소그룹</h3>
+          <span class="tag tag-green">모집 중</span>
+        </div>
+        <p class="text-stone-400 text-sm mb-4 leading-relaxed">홍대·상수 지역 청년들을 위한 소그룹. 활기찬 나눔과 기도.</p>
+        <div class="text-stone-500 text-xs">인원 11/15 · 화요일 오후 7시</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-white">신혼부부 소그룹</h3>
+          <span class="tag tag-green">모집 중</span>
+        </div>
+        <p class="text-stone-400 text-sm mb-4 leading-relaxed">결혼 5년 이내 부부들의 소그룹. 부부 관계와 신앙을 함께 나눕니다.</p>
+        <div class="text-stone-500 text-xs">인원 6/10 · 수요일 오후 7시 30분</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-white">직장인 소그룹</h3>
+          <span class="tag tag-blue">대기 중</span>
+        </div>
+        <p class="text-stone-400 text-sm mb-4 leading-relaxed">바쁜 직장인들을 위한 유연한 모임. 주말 오후에 진행됩니다.</p>
+        <div class="text-stone-500 text-xs">인원 15/15 · 토요일 오후 4시</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-white">40대 소그룹</h3>
+          <span class="tag tag-green">모집 중</span>
+        </div>
+        <p class="text-stone-400 text-sm mb-4 leading-relaxed">40대 성도들의 삶과 신앙을 나누는 소그룹. 깊은 말씀 나눔 중심.</p>
+        <div class="text-stone-500 text-xs">인원 9/12 · 금요일 오후 7시 30분</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-white">온라인 소그룹</h3>
+          <span class="tag tag-green">모집 중</span>
+        </div>
+        <p class="text-stone-400 text-sm mb-4 leading-relaxed">거리 제약 없이 Zoom으로 만나는 소그룹. 지방·해외 거주도 참여 가능.</p>
+        <div class="text-stone-500 text-xs">인원 7/12 · 일요일 오후 3시</div>
+      </div>
+    </div>
+    <div class="text-center mt-10 reveal">
+      <a href="contact.html" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-stone-950 btn-shimmer shadow-lg">
+        소그룹 신청하기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-stone-800/60 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="logo-icon"><iconify-icon icon="solar:star-bold" style="color:#0c0a08;font-size:16px;"></iconify-icon></div>
+          <span class="font-bold text-lg text-white">기쁨의 교회</span>
+        </div>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-xs">하나님의 사랑으로 함께 피어나는 공동체.</p>
+      </div>
+      <div>
+        <div class="footer-label">메뉴</div>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="footer-link">교회 소개</a></li>
+          <li><a href="worship.html" class="footer-link">예배 안내</a></li>
+          <li><a href="programs.html" class="footer-link">사역</a></li>
+          <li><a href="events.html" class="footer-link">행사</a></li>
+          <li><a href="community.html" class="footer-link">공동체</a></li>
+          <li><a href="contact.html" class="footer-link">오시는 길</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-label">연락처</div>
+        <ul class="space-y-2">
+          <li class="text-stone-500 text-sm">서울 마포구 합정동</li>
+          <li class="text-stone-500 text-sm">02-1234-5678</li>
+          <li class="text-stone-500 text-sm">hello@joychurch.kr</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-stone-800/60 pt-8">
+      <p class="text-stone-600 text-sm">© 2026 기쁨의 교회. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>

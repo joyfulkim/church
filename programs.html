@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사역 — 기쁨의 교회</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Pretendard','sans-serif']},colors:{gold:{300:'#f2d9a3',400:'#e9c16a',500:'#dfa83a',600:'#c8901e',700:'#a97016'}}}}}</script>
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="logo-icon"><iconify-icon icon="solar:star-bold" style="color:#0c0a08;font-size:16px;"></iconify-icon></div>
+        <span class="font-bold text-lg text-white tracking-tight">기쁨의 교회</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="about.html" class="nav-link">소개</a>
+        <a href="worship.html" class="nav-link">예배</a>
+        <a href="programs.html" class="nav-link">사역</a>
+        <a href="events.html" class="nav-link">행사</a>
+        <a href="community.html" class="nav-link">공동체</a>
+        <a href="contact.html" class="nav-link">오시는 길</a>
+      </div>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-stone-950 btn-shimmer">
+        <iconify-icon icon="solar:heart-bold" style="font-size:14px;"></iconify-icon>
+        함께 예배해요
+      </a>
+      <button id="mob-btn" class="md:hidden p-2 text-stone-400"><iconify-icon icon="solar:hamburger-menu-linear" style="font-size:22px;"></iconify-icon></button>
+    </div>
+  </div>
+  <div id="mob-menu" class="hidden md:hidden border-t border-stone-800/50">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="about.html" class="text-stone-300 font-medium">소개</a>
+      <a href="worship.html" class="text-stone-300 font-medium">예배</a>
+      <a href="programs.html" class="text-stone-300 font-medium">사역</a>
+      <a href="events.html" class="text-stone-300 font-medium">행사</a>
+      <a href="community.html" class="text-stone-300 font-medium">공동체</a>
+      <a href="contact.html" class="text-stone-300 font-medium">오시는 길</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero hero-grain">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="breadcrumb"><a href="index.html">홈</a><span>›</span><span style="color:#e9c16a;">사역</span></div>
+    <span class="pill-badge mb-5">Ministry</span>
+    <h1 class="text-4xl lg:text-6xl font-black tracking-tight leading-tight mb-5">
+      <span class="text-gold-gradient">은사대로</span>
+      <span class="text-white"> 섬기는</span><br/>
+      <span class="text-white">다양한 사역</span>
+    </h1>
+    <p class="text-stone-400 text-lg max-w-xl leading-relaxed">당신의 이야기와 은사가 공동체를 빛나게 합니다. 함께 섬길 자리가 있습니다.</p>
+  </div>
+</div>
+
+<!-- MINISTRIES GRID -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-16">
+      <span class="pill-badge mb-5">사역팀</span>
+      <h2 class="section-title text-white">5개의 사역팀</h2>
+    </div>
+
+    <!-- Worship Team -->
+    <div class="grid lg:grid-cols-2 gap-14 items-center mb-24 reveal">
+      <div>
+        <div class="pill-badge mb-5">찬양 사역</div>
+        <h3 class="text-3xl font-black text-white mb-4 leading-tight">예배를 인도하는<br/><span class="text-gold-gradient">찬양 팀</span></h3>
+        <p class="text-stone-400 leading-relaxed mb-6">하나님을 찬양하는 열정으로 예배를 이끄는 팀입니다. 보컬, 악기 연주, 영상, 음향 등 다양한 방면에서 은사를 발휘할 수 있습니다. 초보자도 환영하며 함께 성장합니다.</p>
+        <div class="grid grid-cols-2 gap-3 mb-8">
+          <div class="card-bezel rounded-xl p-4">
+            <iconify-icon icon="solar:microphone-bold" style="color:#e9c16a;font-size:20px;" class="mb-2 block"></iconify-icon>
+            <div class="text-white font-semibold text-sm mb-1">보컬</div>
+            <div class="text-stone-500 text-xs">4명 모집 중</div>
+          </div>
+          <div class="card-bezel rounded-xl p-4">
+            <iconify-icon icon="solar:music-note-bold" style="color:#e9c16a;font-size:20px;" class="mb-2 block"></iconify-icon>
+            <div class="text-white font-semibold text-sm mb-1">악기</div>
+            <div class="text-stone-500 text-xs">건반·기타·드럼·베이스</div>
+          </div>
+          <div class="card-bezel rounded-xl p-4">
+            <iconify-icon icon="solar:videocamera-bold" style="color:#e9c16a;font-size:20px;" class="mb-2 block"></iconify-icon>
+            <div class="text-white font-semibold text-sm mb-1">영상·조명</div>
+            <div class="text-stone-500 text-xs">미디어 운영팀</div>
+          </div>
+          <div class="card-bezel rounded-xl p-4">
+            <iconify-icon icon="solar:volume-loud-bold" style="color:#e9c16a;font-size:20px;" class="mb-2 block"></iconify-icon>
+            <div class="text-white font-semibold text-sm mb-1">음향</div>
+            <div class="text-stone-500 text-xs">사운드 엔지니어링</div>
+          </div>
+        </div>
+        <div class="space-y-2 mb-8">
+          <div class="flex items-center gap-2 text-stone-400 text-sm"><iconify-icon icon="solar:clock-circle-bold" style="color:#c8901e;font-size:16px;"></iconify-icon> 매주 토요일 오후 3시 연습</div>
+          <div class="flex items-center gap-2 text-stone-400 text-sm"><iconify-icon icon="solar:users-group-rounded-bold" style="color:#c8901e;font-size:16px;"></iconify-icon> 총 18명 활동 중</div>
+        </div>
+        <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gold-600/40 text-gold-400 text-sm font-semibold hover:bg-gold-600/10 transition-all duration-300">
+          사역 신청 <iconify-icon icon="solar:arrow-right-bold" style="font-size:14px;"></iconify-icon>
+        </a>
+      </div>
+      <div class="card-bezel rounded-2xl aspect-video flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(200,144,30,0.06),rgba(138,85,20,0.04));"></div>
+        <iconify-icon icon="solar:music-note-2-bold" style="color:rgba(200,144,30,0.25);font-size:120px;"></iconify-icon>
+      </div>
+    </div>
+
+    <!-- Small Group -->
+    <div class="grid lg:grid-cols-2 gap-14 items-center mb-24 reveal" style="animation-delay:0.05s;">
+      <div class="order-2 lg:order-1 card-bezel rounded-2xl aspect-video flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(200,144,30,0.06),rgba(138,85,20,0.04));"></div>
+        <iconify-icon icon="solar:users-group-two-rounded-bold" style="color:rgba(200,144,30,0.25);font-size:120px;"></iconify-icon>
+      </div>
+      <div class="order-1 lg:order-2">
+        <div class="pill-badge mb-5">소그룹</div>
+        <h3 class="text-3xl font-black text-white mb-4 leading-tight">깊이 연결되는<br/><span class="text-gold-gradient">소그룹 모임</span></h3>
+        <p class="text-stone-400 leading-relaxed mb-6">10-15명으로 구성된 소그룹에서 삶을 나누고, 함께 기도하며 서로를 격려합니다. 지역별, 연령별, 관심사별로 다양한 그룹이 운영됩니다.</p>
+        <div class="grid grid-cols-3 gap-3 mb-8">
+          <div class="card-bezel rounded-xl p-4 text-center">
+            <div class="text-2xl font-black text-gold-gradient">12</div>
+            <div class="text-stone-500 text-xs mt-1">활성 그룹</div>
+          </div>
+          <div class="card-bezel rounded-xl p-4 text-center">
+            <div class="text-2xl font-black text-gold-gradient">5개</div>
+            <div class="text-stone-500 text-xs mt-1">지역 구분</div>
+          </div>
+          <div class="card-bezel rounded-xl p-4 text-center">
+            <div class="text-2xl font-black text-gold-gradient">매주</div>
+            <div class="text-stone-500 text-xs mt-1">모임 주기</div>
+          </div>
+        </div>
+        <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gold-600/40 text-gold-400 text-sm font-semibold hover:bg-gold-600/10 transition-all duration-300">
+          소그룹 찾기 <iconify-icon icon="solar:arrow-right-bold" style="font-size:14px;"></iconify-icon>
+        </a>
+      </div>
+    </div>
+
+    <!-- Other Ministries -->
+    <div class="grid md:grid-cols-3 gap-6 reveal stagger">
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="icon-box mb-5"><iconify-icon icon="solar:hand-heart-bold" style="color:#e9c16a;font-size:24px;"></iconify-icon></div>
+        <h3 class="text-xl font-bold text-white mb-3">봉사 사역</h3>
+        <p class="text-stone-400 text-sm leading-relaxed mb-5">주차, 안내, 새 가족 환영, 어린이 돌봄 등 예배를 섬기는 다양한 봉사 자리가 있습니다.</p>
+        <div class="text-stone-500 text-xs">• 주차팀 • 안내팀 • 다락방팀 • 어린이팀</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="icon-box mb-5"><iconify-icon icon="solar:global-bold" style="color:#e9c16a;font-size:24px;"></iconify-icon></div>
+        <h3 class="text-xl font-bold text-white mb-3">선교 사역</h3>
+        <p class="text-stone-400 text-sm leading-relaxed mb-5">국내외 선교사를 지원하고, 단기 선교 및 지역 전도 활동에 참여할 수 있습니다.</p>
+        <div class="text-stone-500 text-xs">• 해외 파송 2명 지원 중 • 분기별 단기 선교</div>
+      </div>
+      <div class="card-bezel rounded-2xl p-7">
+        <div class="icon-box mb-5"><iconify-icon icon="solar:star-shine-bold" style="color:#e9c16a;font-size:24px;"></iconify-icon></div>
+        <h3 class="text-xl font-bold text-white mb-3">어린이 사역</h3>
+        <p class="text-stone-400 text-sm leading-relaxed mb-5">어린이들이 말씀 안에서 자라도록 돕는 교사 사역. 주일학교 교사를 모집하고 있습니다.</p>
+        <div class="text-stone-500 text-xs">• 유아부 • 유치부 • 초등부</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN CTA -->
+<section class="py-20 relative" style="background:#110e09;">
+  <div class="max-w-3xl mx-auto px-6 text-center reveal">
+    <span class="pill-badge mb-6 mx-auto w-fit">함께 섬겨요</span>
+    <h2 class="text-3xl lg:text-4xl font-black text-white mb-5">당신의 자리가 기다리고 있습니다</h2>
+    <p class="text-stone-400 mb-10 leading-relaxed">경험이 없어도 괜찮습니다. 섬기고 싶은 마음 하나면 충분합니다.</p>
+    <a href="contact.html" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-stone-950 btn-shimmer shadow-lg">
+      <iconify-icon icon="solar:letter-bold" style="font-size:18px;"></iconify-icon>
+      사역 문의하기
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-stone-800/60 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="logo-icon"><iconify-icon icon="solar:star-bold" style="color:#0c0a08;font-size:16px;"></iconify-icon></div>
+          <span class="font-bold text-lg text-white">기쁨의 교회</span>
+        </div>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-xs">하나님의 사랑으로 함께 피어나는 공동체.</p>
+      </div>
+      <div>
+        <div class="footer-label">메뉴</div>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="footer-link">교회 소개</a></li>
+          <li><a href="worship.html" class="footer-link">예배 안내</a></li>
+          <li><a href="programs.html" class="footer-link">사역</a></li>
+          <li><a href="events.html" class="footer-link">행사</a></li>
+          <li><a href="community.html" class="footer-link">공동체</a></li>
+          <li><a href="contact.html" class="footer-link">오시는 길</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-label">연락처</div>
+        <ul class="space-y-2">
+          <li class="text-stone-500 text-sm">서울 마포구 합정동</li>
+          <li class="text-stone-500 text-sm">02-1234-5678</li>
+          <li class="text-stone-500 text-sm">hello@joychurch.kr</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-stone-800/60 pt-8">
+      <p class="text-stone-600 text-sm">© 2026 기쁨의 교회. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
