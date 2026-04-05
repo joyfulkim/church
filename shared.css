@@ -8,10 +8,9 @@ body { font-family: 'Pretendard', sans-serif; background: #0c0a08; color: #f5f0e
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid rgba(200,144,30,0.1);
 }
-.logo-icon {
+.logo-img {
   width: 32px; height: 32px; border-radius: 8px;
-  background: linear-gradient(135deg, #c8901e, #e9c16a);
-  display: flex; align-items: center; justify-content: center;
+  object-fit: cover;
 }
 .nav-link {
   font-size: 0.875rem; font-weight: 500;
